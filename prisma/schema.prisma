@@ -5,3 +5,19 @@ generator client {
 datasource db {
   provider = "mongodb"
 }
+
+model Operative {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  codename  String   @unique
+  rank      String
+  status    String
+  specialty String
+}
+
+model Mission {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  riskLevel   String
+  description String
+  isActive    Boolean  @default(true)
+}
