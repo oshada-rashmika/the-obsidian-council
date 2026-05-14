@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import { cacheLife, cacheTag } from "next/cache";
 
 async function getOperative() {
@@ -6,7 +6,6 @@ async function getOperative() {
   cacheLife({ revalidate: 3600 });
   cacheTag('council-roster');
 
-  const prisma = new PrismaClient();
   return await prisma.operative.findMany();
 }
 
