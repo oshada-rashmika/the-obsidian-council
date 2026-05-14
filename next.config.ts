@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   output: "standalone",
   cacheComponents: true,
   experimental: {
-    ppr: true,
     turbopackFileSystemCacheForBuild: true,
   },
 };
