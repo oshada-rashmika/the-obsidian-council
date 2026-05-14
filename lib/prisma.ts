@@ -1,15 +1,12 @@
-// lib/prisma.ts
 import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-// Debug: This will show up in your terminal, not the browser console.
-console.log("--- SYSTEM CHECK: DATABASE_URL is", process.env.DATABASE_URL ? "DETECTED" : "NULL ---");
+if (!process.env.DATABASE_URL) {
+  console.error("CRITICAL: DATABASE_URL is missing from process.env");
+}
 
 export const prisma =
-  globalForPrisma.prisma ||
-  new PrismaClient({
-    datasourceUrl: process.env.DATABASE_URL, // Correct property for modern Prisma
-  });
+  globalForPrisma.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
